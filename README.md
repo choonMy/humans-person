@@ -1,10 +1,12 @@
 # humans-person
-### platform
+### Platform
     - nodejs > ver 8.0
+    - npm
+
 ### Steps to setup 
 
 1. Clone the repo into local computer.
-2. mysql database schema and table 
+2. Setup mysql database schema and table 
     - run the scripts in db folder to create humans schema and person table.
 3. Navigate to rest-api folder where the package.json is located, and run 
     ```
@@ -19,12 +21,12 @@
         DB: "humans"
     ```
 
-5. Start the server by running 
+5. Start the app by running 
     ```
     npm start
     ```
-    If everything set correctly, you should see log showing the server started suscessfully and waiting to serve port 3000.
+    If everything set correctly, you should see console log output showing the server started suscessfully and waiting to serve on port 3000.
 
 ### Test using POSTMAN
 
-1. **Postman** collection script was included in the repo to test all the endpoints, import _humans-test.postman_collection.json_ into postman, and run the tests.
+1. **Postman** collection script was included in the repo to test all the endpoints, import _**humans-test.postman_collection.json**_ into postman, and run the tests.
