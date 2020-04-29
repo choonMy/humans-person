@@ -1,4 +1,5 @@
 const Person = require("../model/person.model");
+const { check, validationResult } = require("express-validator/check");
 
 // Create and Save a new person
 exports.create = (req, res) => {
@@ -7,9 +8,15 @@ exports.create = (req, res) => {
         res.status(400).send({
             message: "Content can not be empty!"
         });
+
     }
 
-
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.status(422).json({
+            errors: errors.array()
+        })
+    }
 
     // Create a person
     const person = new Person({
@@ -140,3 +147,32 @@ exports.deleteAll = (req, res) => {
         else res.send({ message: `All persons were deleted successfully!` });
     });
 };
+
+exports.validate = (method) => {
+    switch (method) {
+        case 'create': {
+            return [
+                check('name', "name is missing").exists(),
+                check('name', "name cannot be empty").not().isEmpty(),
+                check('email', "email is missing").exists(),
+                check('dob', "dob is missing").exists(),
+                check('idCardNum', "idCardNum is missing").exists(),
+                check('gender', "gender is missing").exists(),
+                check('country', "country is missing").exists()
+            ]
+        }
+        case 'update': {
+            return [
+                check('name', "name is missing").exists(),
+                check('name', "name cannot be empty").not().isEmpty(),
+                check('email', "email is missing").exists(),
+                check('dob', "dob is missing").exists(),
+                check('idCardNum', "idCardNum is missing").exists(),
+                check('gender', "gender is missing").exists(),
+                check('country', "country is missing").exists()
+            ]
+        }
+        
+    }
+
+}
